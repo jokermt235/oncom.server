@@ -25,3 +25,10 @@ class ShopListView(generics.ListAPIView):
 
 class ShopCreateView(generics.CreateAPIView):
     serializer_class = ShopSerializer
+
+class ProductListView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    queryset  = Category.objects.all()
+
+class ProductCreateView(generics.CreateAPIView):
+    serializer_class = ProductSerializer

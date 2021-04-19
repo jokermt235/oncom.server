@@ -23,4 +23,6 @@ urlpatterns = [
     path('sub_category/create/', SubcategoryCreateView.as_view()),
     path('shop/all/', ShopListView.as_view()),
     path('shop/create/', ShopCreateView.as_view()),
+    path('product/all/', ProductListView.as_view()),
+    path('product/create/', ProductCreateView.as_view()),
 ]
