@@ -22,6 +22,8 @@ class CategoryCreateView(AdminCreateView):
 class SubcategoryListView(generics.ListAPIView):
     serializer_class = CategorySerializer
     queryset  = Category.objects.all()
+    def get_queryset(self):
+        return ModelManager(Category).find()
 
 class SubcategoryCreateView(AdminCreateView):
     serializer_class = CategorySerializer
