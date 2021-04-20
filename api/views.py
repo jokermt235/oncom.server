@@ -31,7 +31,7 @@ class SubcategoryCreateView(AdminCreateView):
 
 class ShopListView(generics.ListAPIView):
     serializer_class = ShopSerializer
-    queryset  = Category.objects.all()
+    queryset  = Shop.objects.all()
 
 class ShopCreateView(UserCreateView):
     serializer_class = ShopSerializer
