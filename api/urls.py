@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import *
+from rest_framework.authtoken.views import obtain_auth_token 
 urlpatterns = [
     path('category/all/', CategoryListView.as_view()),
     path('category/create/', CategoryCreateView.as_view()),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('shop/create/', ShopCreateView.as_view()),
     path('product/all/', ProductListView.as_view()),
     path('product/create/', ProductCreateView.as_view()),
+    path('token/', obtain_auth_token), 
 ]
