@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .serializers import *
 from .models import  *
+from .managers import  *
 from rest_framework.permissions import IsAdminUser
 from rest_framework.permissions import IsAuthenticated
 
@@ -23,7 +24,7 @@ class SubcategoryListView(generics.ListAPIView):
     serializer_class = CategorySerializer
     queryset  = Category.objects.all()
     def get_queryset(self):
-        return ModelManager(Category).find()
+        return ModelManager(Subcategory).find(self.kwargs)
 
 class SubcategoryCreateView(AdminCreateView):
     serializer_class = CategorySerializer
