@@ -1,8 +1,12 @@
+"""This test can cover all reusable code in api application
+    backend authored by Mutalip
+    mail: jokermt235@yandex.com
+    github : https://github.com/jokermt235
+"""
 from django.test import TestCase
 from django.core import serializers
 from .models import *
 from .managers import *
-# Create your tests here.
 
 class TestSubcategory(TestCase):
     def setUp(self) -> None:
