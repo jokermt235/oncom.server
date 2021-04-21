@@ -3,6 +3,7 @@
     mail: jokermt235@yandex.com
     github : https://github.com/jokermt235
 """
+from django.contrib.auth.models import AnonymousUser, User
 from django.test import TestCase
 from django.core import serializers
 from .models import *
@@ -11,21 +12,24 @@ from .managers import *
 class TestSubcategory(TestCase):
     def setUp(self) -> None:
         self.category = Category.objects.create(name="Категория 1", desc="Описание Категории 1")
+        self.user = User.objects.create_user(username="vasya", email="vasya@mail.ru" ,password="123456")
         #Create Subcategory
         self.subcategory1 = Subcategory.objects.create(name="Подкатегория 1" , 
                             desc="Описание Подкатегории 1", category=self.category)
         self.subcategory2 = Subcategory.objects.create(name="Подкатегория 2" , 
                             desc="Описание Подкатегории 2", category=self.category)
 
-        self.shop1 = Shop.objects.create(name="Магазин 1", rating=1)
-        #Create Producs
+        self.shop1 = Shop.objects.create(name="Магазин 1", rating=1, user=self.user)
+        """ This is product1 """
         self.product1 = Product.objects.create(name="Продукт 1", desc="Описание продукта 1", 
-                        category=self.category,rating=0,price=10,discount=0,phone="123 312 3123",
-                        shop=self.shop, subcategory=self.subcategory1)
+                        category=self.category,rating=0,user=self.user, price=10,
+                        discount=0,phone="0312 312 3121",
+                        shop=self.shop1, subcategory=self.subcategory1)
+        """ This is product2 """
         self.product2 = Product.objects.create(name="Продукт 2", desc="Описание продукта 2", 
-                        category=self.category,rating=0,price=10,discount=0,phone="123 312 3123",
+                        category=self.category,rating=0,user=self.user,
+                        price=10,discount=0,phone="0312 312 3122",
                         shop=self.shop1,subcategory=self.subcategory2)
-
 
     def test_get_subcategory_list_by_category(self):
         cat_id = self.category.id
