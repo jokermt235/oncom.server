@@ -38,7 +38,8 @@ class ShopCreateView(UserCreateView):
 
 class ProductListView(generics.ListAPIView):
     serializer_class = ProductSerializer
-    queryset  = Category.objects.all()
+    def get_queryset(self):
+        return ModelManager(Product).find(self.kwargs)
 
 class ProductCreateView(UserCreateView):
     serializer_class = ProductSerializer
