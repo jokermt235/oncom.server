@@ -82,5 +82,9 @@ class TestUserShopAndUserProducts(TestCase):
         self.assertIn("Магазин 4" , results)
 
     def test_allow_user_update_belonged_shop(self):
-        pass
+        user_id = self.user1.id
+        #results = serializers.serialize("json",)
+        shop = ModelGetManager(Shop).get(user_id)
+        print(shop.id)
+
 
