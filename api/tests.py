@@ -83,8 +83,15 @@ class TestUserShopAndUserProducts(TestCase):
 
     def test_allow_user_update_belonged_shop(self):
         user_id = self.user1.id
-        #results = serializers.serialize("json",)
-        shop = ModelGetManager(Shop).get(user_id)
-        print(shop.id)
+        shops = ModelManager(Shop).find(params={"user_id" : user_id})
+        for shop in shops:
+            shop.name = shop.name  + " updated"
+            shop.save()
+
+        results = serializers.serialize("json", ModelManager(Shop).find(params = {"user_id" : user_id}))
+
+        self.assertIn("updated" , results)
+
+
 
 

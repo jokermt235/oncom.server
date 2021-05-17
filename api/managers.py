@@ -12,4 +12,4 @@ class ModelManager:
 
 class ModelGetManager(ModelManager):
     def get(self, id : int):
-        return self.model.objects.get(user_id = id)
+        return self.model.objects.get(pk = id)
