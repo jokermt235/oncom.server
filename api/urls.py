@@ -28,4 +28,5 @@ urlpatterns = [
     path('product/all/', ProductListView.as_view()),
     path('product/create/', ProductCreateView.as_view()),
     path('token/', obtain_auth_token),
+    path('users/signup', UserCreateView.as_view()),
 ]

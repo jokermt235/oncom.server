@@ -87,11 +87,8 @@ class TestUserShopAndUserProducts(TestCase):
         for shop in shops:
             shop.name = shop.name  + " updated"
             shop.save()
-
         results = serializers.serialize("json", ModelManager(Shop).find(params = {"user_id" : user_id}))
-
+        self.assertIn("Магазин 2" , results)
         self.assertIn("updated" , results)
-
-
 
 

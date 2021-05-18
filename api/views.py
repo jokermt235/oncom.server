@@ -43,3 +43,6 @@ class ProductListView(generics.ListAPIView):
 
 class ProductCreateView(UserCreateView):
     serializer_class = ProductSerializer
+
+class UserCreateView(generics.CreateAPIView):
+    serializer_class = UserSerializer
