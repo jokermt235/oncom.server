@@ -26,7 +26,10 @@ urlpatterns = [
     path('shop/all/', ShopListView.as_view()),
     path('shop/create/', ShopCreateView.as_view()),
     path('product/all/', ProductListView.as_view()),
+    path('pincode/all/', PincodeListView.as_view()),
+    path('pincode/create/', PincodeCreateView.as_view()),
     path('product/create/', ProductCreateView.as_view()),
-    path('token/', obtain_auth_token),
-    path('users/signup', UserCreateView.as_view()),
+    path('user/token/', obtain_auth_token),
+    path('user/signup/', UserCreateView.as_view()),
+    path('user/profile/', UserView.as_view()),
 ]

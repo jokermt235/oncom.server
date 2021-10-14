@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Category(models.Model):
     name     = models.CharField(unique=True , max_length=255)
-    desc     = models.CharField(max_length=255)
+    descr     = models.CharField(max_length=255)
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
 
@@ -20,7 +20,7 @@ class Subcategory(models.Model):
 
 class Shop(models.Model):
     name   = models.CharField(unique=True, max_length=255)
-    desc   = models.CharField(max_length=255)
+    descr   = models.CharField(max_length=255)
     rating = models.IntegerField(default=0)
     user   = models.ForeignKey(User, on_delete=models.CASCADE)
     image  = models.ImageField(default='shop.jpg')
@@ -29,7 +29,7 @@ class Shop(models.Model):
 
 class Product(models.Model):
     name      = models.CharField(unique=True, max_length=255)
-    desc      = models.CharField(max_length=255)
+    descr      = models.CharField(max_length=255)
     rating    = models.IntegerField(default=0)
     price     = models.IntegerField(default=0)
     discount  = models.IntegerField(default=0)
@@ -41,3 +41,13 @@ class Product(models.Model):
     image  = models.ImageField(default='shop.jpg')
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
+
+class Pincode(models.Model):
+    pincode  = models.CharField(max_length=16)
+    sended   = models.BooleanField(default=False)
+    deleted   = models.BooleanField(default=False)
+    ttl      = models.IntegerField(default=0)
+    user   = models.ForeignKey(User, on_delete=models.CASCADE)
+    created  = models.DateField(default=date.today)
+    modified = models.DateField(default=date.today)
+
