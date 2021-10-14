@@ -22,6 +22,12 @@ class ProductSerializer(serializers.ModelSerializer):
         model  = Product
         fields = '__all__'
 
+class PincodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = Pincode
+        fields = '__all__'
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model  = get_user_model()
@@ -34,6 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
             return value
         def create(self, validated_data):
             user = get_user_model()(**validated_data)
-            user.set_password(validated_data['password'])
+            password = validated_data.pop('password')
+            user.set_password(password)
             user.save()
             return user
