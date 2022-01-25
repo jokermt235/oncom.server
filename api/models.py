@@ -43,11 +43,17 @@ class Product(models.Model):
     modified = models.DateField(default=date.today)
 
 class Pincode(models.Model):
-    pincode  = models.CharField(max_length=16)
+    pincode  = models.CharField(max_length=16, default=0)
     sended   = models.BooleanField(default=False)
-    deleted   = models.BooleanField(default=False)
+    email    = models.CharField(max_length=32, default=0)
+    deleted  = models.BooleanField(default=False)
     ttl      = models.IntegerField(default=0)
-    user   = models.ForeignKey(User, on_delete=models.CASCADE)
+    created  = models.DateField(default=date.today)
+    modified = models.DateField(default=date.today)
+
+class Diaglist(models.Model):
+    name  = models.CharField(max_length=16, default=0)
+    gender   = models.IntegerField(default=0)
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
 

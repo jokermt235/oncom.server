@@ -9,7 +9,7 @@ from django.core import serializers
 from .models import *
 from .managers import *
 
-class TestFilterByCategoryAndSubcategory(TestCase):
+"""class TestFilterByCategoryAndSubcategory(TestCase):
     def setUp(self) -> None:
         self.category = Category.objects.create(name="Категория 1", desc="Описание Категории 1")
         self.category2 = Category.objects.create(name="Категория 2", desc="Описание Категории 2")
@@ -21,17 +21,14 @@ class TestFilterByCategoryAndSubcategory(TestCase):
                             desc="Описание Подкатегории 2", category=self.category)
 
         self.shop1 = Shop.objects.create(name="Магазин 1", rating=1, user=self.user)
-        """ This is product1 """
         self.product1 = Product.objects.create(name="Продукт 1", desc="Описание продукта 1", 
                         category=self.category,rating=0,user=self.user, price=10,
                         discount=0,phone="0312 312 3121",
                         shop=self.shop1, subcategory=self.subcategory1)
-        """ This is product2 """
         self.product2 = Product.objects.create(name="Продукт 2", desc="Описание продукта 2", 
                         category=self.category,rating=0,user=self.user,
                         price=10,discount=0,phone="0312 312 3122",
                         shop=self.shop1,subcategory=self.subcategory2)
-        """ This is product3 """
         self.product3 = Product.objects.create(name="Продукт 3", desc="Описание продукта 3", 
                         category=self.category2,rating=0,user=self.user,
                         price=10,discount=0,phone="0312 312 3123",
@@ -52,7 +49,6 @@ class TestFilterByCategoryAndSubcategory(TestCase):
         results = serializers.serialize("json", ModelManager(Product).find(params = {"subcategory_id" : sub_cat_id}))
         self.assertIn("Продукт 2", results)
     
-    """Test if both category and subcategory choosen check by id (FK)"""
 
     def test_get_product_by_category_and_subcategory(self):
         cat_id     = self.category2.id
@@ -70,7 +66,6 @@ class TestUserShopAndUserProducts(TestCase):
         self.shop3 = Shop.objects.create(name="Магазин 3", rating=1, user=self.user2)
         self.shop4 = Shop.objects.create(name="Магазин 4", rating=1, user=self.user2)
 
-    """Test if user has multiple shops"""
     def test_get_shoplist_of_user(self):
         user_id = self.user1.id
         results = serializers.serialize("json", ModelManager(Shop).find(params = {"user_id" : user_id}))
@@ -90,5 +85,14 @@ class TestUserShopAndUserProducts(TestCase):
         results = serializers.serialize("json", ModelManager(Shop).find(params = {"user_id" : user_id}))
         self.assertIn("Магазин 2" , results)
         self.assertIn("updated" , results)
+"""
 
+class TestPincode(TestCase):
+    def setUp(self)-> None:
+        self.user1 = User.objects.create_user(username="vasya1", email="vasya1@mail.ru" ,password="123456")
+        self.pincode1 = Pincode.objects.create(user=self.user1,pincode=1234)
 
+    def test_generate_pincode(self):
+        user_id = self.user1.id
+        result = serializers.serialize("json", ModelManager(Pincode).find(params = {"user_id": user_id}));
+        self.assertIn("1234", result)
