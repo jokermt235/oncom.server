@@ -129,6 +129,16 @@ class DiaglistListView(generics.ListAPIView):
     def get_queryset(self):
         return ModelManager(Diaglist).find(self.kwargs)
 
+class QuestionListView(generics.ListAPIView):
+     serializer_class = QuestionSerializer
+     def get_queryset(self):
+         return ModelManager(Question).find(self.kwargs)
+
+class ResultListView(generics.ListAPIView):
+     serializer_class = ResultSerializer
+     def get_queryset(self):
+         return ModelManager(Result).find(self.kwargs)
+
 
 class PincodeListView(AdminCreateView):
     serializer_class = PincodeSerializer

@@ -38,4 +38,8 @@ urlpatterns = [
     path('user/check/', UserEmailView.as_view({'get':'retrieve'})),
     path('diaglist/all/', DiaglistListView.as_view()),
     path('diaglist/all/<int:gender>', DiaglistListView.as_view()),
+    path('question/all/<int:diaglist_id>', QuestionListView.as_view()),
+    path('result/all/<int:diaglist_id>', ResultListView.as_view()),
+    path('result/all/', ResultListView.as_view()),
+    path('result/all/<int:diaglist_id>/<int:value>', ResultListView.as_view()),
 ]

@@ -52,3 +52,13 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = Question
+        fields = '__all__'
+
+class ResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = Result
+        fields = '__all__'
