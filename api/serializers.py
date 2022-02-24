@@ -10,25 +10,6 @@ logger = logging.getLogger(__name__)
 
 logger.debug("INIT : Serializers")
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model  = Category
-        fields = '__all__'
-
-class SubcategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model  = Subcategory
-        fields = '__all__'
-
-class ShopSerializer(serializers.ModelSerializer):
-    class Meta:
-        model  = Shop
-        fields = '__all__'
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model  = Product
-        fields = '__all__'
-
 class PincodeSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Pincode

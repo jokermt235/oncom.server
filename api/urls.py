@@ -18,18 +18,9 @@ from django.urls import path
 from .views import *
 from rest_framework.authtoken.views import obtain_auth_token 
 urlpatterns = [
-    path('category/all/', CategoryListView.as_view()),
-    path('category/create/', CategoryCreateView.as_view()),
-    path('sub_category/all/', SubcategoryListView.as_view()),
-    path('sub_category/all/<int:category_id>', SubcategoryListView.as_view()),
-    path('sub_category/create/', SubcategoryCreateView.as_view()),
-    path('shop/all/', ShopListView.as_view()),
-    path('shop/create/', ShopCreateView.as_view()),
-    path('product/all/', ProductListView.as_view()),
     path('pincode/all/', PincodeListView.as_view()),
     path('pincode/create/', PincodeCreateView.as_view({'post':'create'})),
     path('pincode/check/', PincodeCheckView.as_view({'get':'retrieve'})),
-    path('product/create/', ProductCreateView.as_view()),
     path('pincode/recover/', PincodeCreateView.as_view({'post':'recover'})),
     path('pincode/recovercheck/', PincodeCheckView.as_view({'get':'recovercheck'})),
     path('user/token/', obtain_auth_token),

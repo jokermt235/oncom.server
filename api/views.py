@@ -27,37 +27,6 @@ class UserCreateViewSet(viewsets.ModelViewSet):
 class UserListView(generics.ListAPIView):
     permission_classes = [IsAuthenticated] 
 
-class CategoryListView(generics.ListAPIView):
-    serializer_class = CategorySerializer
-    queryset  = Category.objects.all()
-
-class CategoryCreateView(AdminCreateView):
-    serializer_class = CategorySerializer
-
-class SubcategoryListView(generics.ListAPIView):
-    serializer_class = CategorySerializer
-    def get_queryset(self):
-        return ModelManager(Subcategory).find(self.kwargs)
-
-class SubcategoryCreateView(AdminCreateView):
-    serializer_class = CategorySerializer
-
-class ShopListView(generics.ListAPIView):
-    serializer_class = ShopSerializer
-    def get_queryset(self):
-        return ModelManager(Shop).find(self.kwargs)
-
-class ShopCreateView(UserCreateView):
-    serializer_class = ShopSerializer
-
-class ProductListView(generics.ListAPIView):
-    serializer_class = ProductSerializer
-    def get_queryset(self):
-        return ModelManager(Product).find(self.kwargs)
-
-class ProductCreateView(UserCreateView):
-    serializer_class = ProductSerializer
-
 class UserCreateView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
