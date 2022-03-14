@@ -1,5 +1,7 @@
 import smtplib, ssl
 from email.message import EmailMessage
+from django.conf import settings
+
 
 class Sender:
    def send(message):
@@ -9,28 +11,25 @@ class EmailSender(Sender):
     def __init__(self, to):
         self.to = to
     def send(self, message) :
-        port = 465  # For SSL
-        password = 'Jkpro2357FT'
+        print("PRINT PORT TO THE ACCESS")
+        print(settings.EMAIL_PORT)
+        print("PRINT PASSWORD TO THE ACCESS")
+        print(settings.EMAIL_PASSWORD)
+
+        print("PRINT EMAIL TO THE ACCESS")
+        print(settings.EMAIL_LOGIN)
+        
+        port = settings.EMAIL_PORT  # For SSL
+        password = settings.EMAIL_PASSWORD
         context = ssl.create_default_context()
 
         msg = EmailMessage()
         msg['Subject'] = 'Код подтвеждения для входа в систему'
-        msg['From'] = 'foresdata.t@gmail.com'
+        msg['From'] = settings.EMAIL_LOGIN
         msg['To'] = self.to
 
         msg.set_content(message)
 
-        with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-            server.login("foresdata.t@gmail.com", password)
+        with smtplib.SMTP_SSL(settings.EMAIL_SMTP, port, context=context) as server:
+            server.login(settings.EMAIL_LOGIN, password)
             return server.send_message(msg)
-
-        """self.message = message
-        #res = subprocess.run(['echo', message, '|' , 'mailx','-s','"Admin mutalip message"','-r','"likegeeks<likegeeks@example.com>"',self.to], True)
-        #return res.stdout;
-        return send_mail(
-            'OPT Code',
-            message,
-            'likegeeks<likegeeks@example.com>',
-            [self.to],
-            fail_silently=False,
-        )"""        
