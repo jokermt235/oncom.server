@@ -47,3 +47,38 @@ class Result(models.Model):
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
 
+# Profile model stands for separate user from profile 
+
+class Profile(models.Model):
+    user         = models.ForeignKey(User, on_delete=models.CASCADE)
+    phone        = models.CharField(max_length=255, blank=True)
+    email        = models.CharField(max_length=255, blank=True)
+    iin          = models.CharField(max_length=255, blank=True)
+    deviceId     = models.CharField(max_length=255, blank=True)
+    langId       = models.CharField(max_length=10, default="RU")
+    isAndroid    = models.BooleanField(default=False)
+    isIOS        = models.BooleanField(default=False)
+    activated    = models.BooleanField(default=False)
+    registered   = models.BooleanField(default=False)
+    synchronized = models.BooleanField(default=False)
+    firstTime    = models.BooleanField(default=True)
+    notification = models.BooleanField(default=True)
+    agreed       = models.BooleanField(default=False)
+    year         = models.IntegerField(default=22)
+    month        = models.IntegerField(default=1)
+    day          = models.IntegerField(default=1)
+    gender       = models.IntegerField(default=0)
+    height       = models.IntegerField(default=150)
+    weight       = models.IntegerField(default=45)
+
+# Document model user can keep documents  on his mobile application
+
+class Document(models.Model):
+    user        = models.ForeignKey(User, on_delete=models.CASCADE)
+    name        = models.CharField(max_length=255, blank=True)
+    size        = models.IntegerField(default=0)
+    mimetype    = models.CharField(max_length=255, blank=True)
+    path        = models.CharField(max_length=255, blank=True)
+    url         = models.CharField(max_length=255, blank=True)
+    deleted     = models.BooleanField(default=False)
+

@@ -34,6 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Question
@@ -43,3 +44,15 @@ class ResultSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Result
         fields = '__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = Profile
+        fields = '__all__'
+
+class DocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = Document
+        fields = '__all__'
+
+
