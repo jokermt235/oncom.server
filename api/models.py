@@ -50,7 +50,7 @@ class Result(models.Model):
 # Profile model stands for separate user from profile 
 
 class Profile(models.Model):
-    user         = models.ForeignKey(User, on_delete=models.CASCADE)
+    user         = models.ForeignKey(User, related_name='user_by', on_delete=models.CASCADE)
     phone        = models.CharField(max_length=255, blank=True)
     email        = models.CharField(max_length=255, blank=True)
     iin          = models.CharField(max_length=255, blank=True)

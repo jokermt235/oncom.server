@@ -1,3 +1,4 @@
+import profile
 from django.db.models import fields
 from rest_framework import serializers
 from .models import *
@@ -58,6 +59,7 @@ class ResultSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model  = Profile
         fields = '__all__'

@@ -33,7 +33,12 @@ class UserCreateView(generics.CreateAPIView):
 class UserView(UserListView):
     serializer_class = UserSerializer
     def get_queryset(self):
-        return ModelManager(User).find({"id"  : self.request.user.id })
+        return UserManager(User).find({"id"  : self.request.user.id })
+
+class ProfileView(UserListView):
+    serializer_class = ProfileSerializer
+    def get_queryset(self):
+        return  ModelManager(Profile).find({"user_id"  : self.request.user.id })
 
 class UserEmailView(viewsets.ViewSet):
     serializer_class = UserSerializer
