@@ -25,7 +25,7 @@ urlpatterns = [
     path('pincode/recovercheck/', PincodeCheckView.as_view({'get':'recovercheck'})),
     path('user/token/', obtain_auth_token),
     path('user/signup/', UserCreateView.as_view()),
-    path('user/profile/', UserView.as_view()),
+    path('user/profile/', ProfileView.as_view()),
     path('user/check/', UserEmailView.as_view({'get':'retrieve'})),
     path('diaglist/all/', DiaglistListView.as_view()),
     path('diaglist/all/<int:gender>', DiaglistListView.as_view()),
