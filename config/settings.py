@@ -95,11 +95,7 @@ DATABASES = {
     },
     'default' : {
         'ENGINE': os.getenv('DB_ENGINE'),
-<<<<<<< HEAD
-        'NAME':  os.getenv('DB_PASSWORD'),
-=======
         'NAME': os.getenv('DB_NAME'),
->>>>>>> 370d84e85bb9ea707b735e7ea4ec602edca668ad
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
