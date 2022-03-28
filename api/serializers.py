@@ -32,6 +32,18 @@ class UserSerializer(serializers.ModelSerializer):
         user = super().create(validated_data)
         user.set_password(validated_data['password'])
         user.save()
+        del validated_data["username"]
+        del validated_data["first_name"]
+        del validated_data["last_name"]
+        del validated_data["password"]
+        validated_data["user_id"] = user.id
+        data = self.context.get("request").data
+        del data["username"]
+        del data["first_name"]
+        del data["last_name"]
+        del data["password"]
+        validated_data.update(data) 
+        Profile.objects.create(**validated_data)
         return user
 
 

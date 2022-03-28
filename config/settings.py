@@ -94,12 +94,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     },
     'default' : {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'oncomdb',
-        'USER': 'dbuser',
-        'PASSWORD': '1',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME':  os.getenv('DB_PASSWORD'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 
 }
