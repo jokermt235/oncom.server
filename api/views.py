@@ -40,6 +40,19 @@ class ProfileView(UserListView):
     def get_queryset(self):
         return  ModelManager(Profile).find({"user_id"  : self.request.user.id })
 
+class DocumentCreateView(UserCreateViewSet):
+    serializer_class = DocumentSerializer
+    def create(self, request):
+        data = DocumentManager.create(self, request)
+        if data :
+            return Response({"success" : True , "data" : data}, status = 201)
+        return Response({"success" : False , "data" : []}, status = 500)
+
+class DocumentListView(UserListView):
+    serializer_class = DocumentSerializer
+    def get_queryset(self):
+        return  ModelManager(Document).find({"user_id"  : self.request.user.id })
+
 class UserEmailView(viewsets.ViewSet):
     serializer_class = UserSerializer
     def retrieve(self, request, pk=None):
@@ -59,7 +72,7 @@ class PincodeCheckView(viewsets.ViewSet):
     def recovercheck(self, request, pk=None):
         pincode = self.request.query_params.get("pincode")
         email = self.request.query_params.get("email")
-        _data = ModelManager(User).find({"email": email});
+        _data = ModelManager(User).find({"email": email})
         if not _data:
             return Response({"success": False,"data" : "Not found"}, status = 404)
 
