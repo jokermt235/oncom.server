@@ -2,7 +2,6 @@ import smtplib, ssl
 from email.message import EmailMessage
 from django.conf import settings
 
-
 class Sender:
    def send(message):
         pass
@@ -10,15 +9,8 @@ class Sender:
 class EmailSender(Sender):
     def __init__(self, to):
         self.to = to
-    def send(self, message) :
-        print("PRINT PORT TO THE ACCESS")
-        print(settings.EMAIL_PORT)
-        print("PRINT PASSWORD TO THE ACCESS")
-        print(settings.EMAIL_PASSWORD)
-
-        print("PRINT EMAIL TO THE ACCESS")
-        print(settings.EMAIL_LOGIN)
-        
+    #Sends an email to client with the specific message
+    def send(self, message) :    
         port = settings.EMAIL_PORT  # For SSL
         password = settings.EMAIL_PASSWORD
         context = ssl.create_default_context()

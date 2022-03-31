@@ -10,9 +10,10 @@ from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 import random;
 from .senders import EmailSender
+from .services import factory
 User = get_user_model()
 
-# Create your views here.
+# Create your views with permission option here.
 
 class AdminCreateView(generics.CreateAPIView):
     permission_classes = [IsAdminUser]
@@ -29,6 +30,13 @@ class UserListView(generics.ListAPIView):
 
 class UserCreateView(generics.CreateAPIView):
     serializer_class = UserSerializer
+
+# Create your views with sending option here
+
+class EmailSenderView(viewsets.ModelViewSet):
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        factory.register('sender', EmailSender)
 
 class UserView(UserListView):
     serializer_class = UserSerializer
@@ -111,6 +119,17 @@ class PincodeCreateView(viewsets.ModelViewSet):
         data = PincodeSerializer.create(validated_data = self.request.data) 
         output = emailSender.send("This is yor OTP dont tell anyone , show someone %d" % rand)
         return Response({"success": True, "data" : output}, status = 201)
+
+class LoginRecoverCreateView(EmailSenderView):
+    serializer_class = ProfileSerializer
+    def recover(self, request, pk=None):
+        data = ModelManager(Profile).find({"iin"  : request.data["iin"]})
+        if not data:
+            return Response({"success" : False}, status = 404)
+        self.sender = factory.create('sender', data[0].email)
+        self.sender.send("Your  login or email is : %s"  % data[0].email)
+        return Response({"success" : True}, status = 200)
+
 
 class DiaglistListView(generics.ListAPIView):
     serializer_class = DiaglistSerializer
