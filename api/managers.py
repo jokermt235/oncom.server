@@ -5,7 +5,7 @@
 """
 import re
 from django.db import models
-from .serializers import ProfileSerializer
+from .serializers import *
 from .forms import UploadFileForm
 
 class Manager:
@@ -59,3 +59,7 @@ class DocumentManager(Manager):
         if form.is_valid():
             form.handle_uploaded_file(request)
         return request.FILES["file"].name
+
+class UserupdateManager(Manager):
+    def create(self, request):
+        return UserupdateSerializer.create(validated_data=request.data)

@@ -56,6 +56,14 @@ class DocumentCreateView(UserCreateViewSet):
             return Response({"success" : True , "data" : data}, status = 201)
         return Response({"success" : False , "data" : []}, status = 500)
 
+class UserUpdateView(UserCreateViewSet):
+    serializer_class = UserupdateSerializer
+    def update(self, request):
+        data = UserupdateManager.create(self, request)
+        if data :
+            return Response({"success" : True , "data" : data}, status = 201)
+        return Response({"success" : False , "data" : []}, status = 500)
+
 class DocumentListView(UserListView):
     serializer_class = DocumentSerializer
     def get_queryset(self):

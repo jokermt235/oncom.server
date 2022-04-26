@@ -41,3 +41,10 @@ class TestDocument(TestCase):
         # As View takes onlye two params a method and action
         response = DocumentCreateView.as_view({'post': 'create'})(request)
         self.assertEqual(response.status_code, 201)
+
+class TestUserupdate(TestCase):
+    def setUp(self) -> None:
+        self.user1 = User.objects.create_user(username="vasya1", email="vasya1@mail.ru",password="123456")
+        return super().setUp()
+    def test_user_update(self):
+            self.assertEqual("a", "b")

@@ -27,6 +27,7 @@ urlpatterns = [
     path('user/signup/', UserCreateView.as_view()),
     path('user/profile/', ProfileView.as_view()),
     path('user/check/', UserEmailView.as_view({'get':'retrieve'})),
+    path('user/update/', UserUpdateView.as_view({'put':'update'})),
     path('diaglist/all/', DiaglistListView.as_view()),
     path('diaglist/all/<int:gender>', DiaglistListView.as_view()),
     path('question/all/<int:diaglist_id>', QuestionListView.as_view()),

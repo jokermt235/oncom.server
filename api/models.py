@@ -1,3 +1,4 @@
+from statistics import mode
 from django.db import models
 from datetime import date
 from django.contrib.auth import get_user_model
@@ -82,3 +83,11 @@ class Document(models.Model):
     url         = models.CharField(max_length=255, blank=True)
     deleted     = models.BooleanField(default=False)
 
+class Userupdate(models.Model):
+    user       = models.ForeignKey(User, on_delete=models.CASCADE)
+    firstName  = models.CharField(max_length=255, blank=True)
+    lastName   = models.CharField(max_length=255, blank=True)
+    confirmed  = models.BooleanField(default=False)
+    created  = models.DateField(default=date.today)
+    modified = models.DateField(default=date.today)
+    

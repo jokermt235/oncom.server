@@ -69,4 +69,9 @@ class DocumentSerializer(serializers.ModelSerializer):
         model  = Document
         fields = '__all__'
 
+class UserupdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Userupdate
+        fields = '__all__'
+
 
