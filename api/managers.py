@@ -7,6 +7,7 @@ import re
 from django.db import models
 from .serializers import *
 from .forms import UploadFileForm
+from .models import *
 
 class Manager:
     def __init__(self, model : models.Model):
@@ -58,6 +59,7 @@ class DocumentManager(Manager):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             form.handle_uploaded_file(request)
+            Document.objects.create(**request.data)
         return request.FILES["file"].name
 
 class UserupdateManager(Manager):

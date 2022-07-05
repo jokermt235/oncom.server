@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from .serializers import *
 from .models import  *
 from .managers import  *
+from django.conf import settings
 from rest_framework.permissions import IsAdminUser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ from django.contrib.auth import get_user_model
 import random;
 from .senders import EmailSender
 from .services import factory
+from django.http import FileResponse
 User = get_user_model()
 
 # Create your views with permission option here.
@@ -31,6 +33,8 @@ class UserListView(generics.ListAPIView):
 class UserCreateView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
+class UserViewSet(viewsets.ViewSet):
+     permission_classes = [IsAuthenticated]
 # Create your views with sending option here
 
 class EmailSenderView(viewsets.ModelViewSet):
@@ -68,6 +72,13 @@ class DocumentListView(UserListView):
     serializer_class = DocumentSerializer
     def get_queryset(self):
         return  ModelManager(Document).find({"user_id"  : self.request.user.id })
+
+class DocumentView(UserViewSet):
+    def view(self, request, filename='haha.jpg'):
+        img = open(settings.MEDIA_PATH + str(request.user.id) + "/" + filename, 'rb') 
+        return FileResponse(img)
+
+
 
 class UserEmailView(viewsets.ViewSet):
     serializer_class = UserSerializer

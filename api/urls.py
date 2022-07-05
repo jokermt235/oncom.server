@@ -35,6 +35,7 @@ urlpatterns = [
     path('result/all/', ResultListView.as_view()),
     path('result/all/<int:diaglist_id>/<int:value>', ResultListView.as_view()),
     path('document/all/', DocumentListView.as_view()),
+    path('document/view/<str:filename>', DocumentView.as_view({'get': 'view'})),
     path('document/create/', DocumentCreateView.as_view({'post':'create'})),
     path('login/recover/', LoginRecoverCreateView.as_view({'post':'recover'})),
 ]
