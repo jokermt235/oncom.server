@@ -58,8 +58,9 @@ class DocumentManager(Manager):
     def create(self, request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.handle_uploaded_file(request)
-            Document.objects.create(**request.data)
+            data = form.handle_uploaded_file(request)
+            print(request.FILES["file"])
+            Document.objects.create(**data)
         return request.FILES["file"].name
 
 class UserupdateManager(Manager):

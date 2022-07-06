@@ -11,7 +11,8 @@ class UploadFileForm(forms.Form):
         except Exception as exc:
             #if directory exists simply pass
             pass
-        
-        with open( settings.MEDIA_PATH + str(request.user.id) + "/" + request.FILES["file"].name , 'wb+') as destination:
+        filepath = settings.MEDIA_PATH + str(request.user.id) + "/" + request.FILES["file"].name
+        with open( filepath , 'wb+') as destination:
             for chunk in request.FILES["file"].chunks():
                 destination.write(chunk)
+        return { "name" : request.FILES["file"].name, "size" :  os.stat(filepath).st_size, "mimetype" : request.FILES["file"].content_type, "url" : "document/view/" , "user_id" : request.user.id}

@@ -55,7 +55,8 @@ class ProfileView(UserListView):
 class DocumentCreateView(UserCreateViewSet):
     serializer_class = DocumentSerializer
     def create(self, request):
-        data = DocumentManager.create(self, request)
+        print(self.request.data)
+        data = DocumentManager.create(self,request)
         if data :
             return Response({"success" : True , "data" : data}, status = 201)
         return Response({"success" : False , "data" : []}, status = 500)

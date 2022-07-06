@@ -81,6 +81,7 @@ class Document(models.Model):
     mimetype    = models.CharField(max_length=255, blank=True)
     path        = models.CharField(max_length=255, blank=True)
     url         = models.CharField(max_length=255, blank=True)
+    created  = models.DateField(default=date.today)
     deleted     = models.BooleanField(default=False)
 
 class Userupdate(models.Model):
