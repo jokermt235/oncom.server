@@ -68,7 +68,7 @@ class ProfileSimpleView(UserViewSet):
             return Response({"success" : True, "data" : json.loads(data)}, status = 200)
         return Response({"success" : False , "data" : []}, status = 404)
     
-    def diagnose(self, request):
+    def diagnosis(self, request):
         service = DiagnoseService()
         data = service.get({"iin" : request.query_params.get("iin")})
         if data: 

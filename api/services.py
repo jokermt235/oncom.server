@@ -77,9 +77,9 @@ class DiagnoseService(GenericService):
     def get(self, params = {}):
         uidService = UidService()
         params = {
-            "uid" :  uidService.get(params)
+            "person-uid" :  uidService.get(params)
         }
-        self.general.get("/api/profile/get-common", params)
+        self.general.get("/api/profile/get-diagnosis", params)
         self.general.close()
         return self.general.getData()
 
