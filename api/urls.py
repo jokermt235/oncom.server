@@ -38,4 +38,7 @@ urlpatterns = [
     path('document/view/<str:filename>', DocumentView.as_view({'get': 'view'})),
     path('document/create/', DocumentCreateView.as_view({'post':'create'})),
     path('login/recover/', LoginRecoverCreateView.as_view({'post':'recover'})),
+    path('profile/general/', ProfileSimpleView.as_view({'get':'general'})),
+    path('profile/common/', ProfileSimpleView.as_view({'get':'common'})),
+
 ]

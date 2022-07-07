@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 import random;
 from .senders import EmailSender
-from .services import factory
+from .services import *
 from django.http import FileResponse
 User = get_user_model()
 
@@ -51,6 +51,22 @@ class ProfileView(UserListView):
     serializer_class = ProfileSerializer
     def get_queryset(self):
         return  ModelManager(Profile).find({"user_id"  : self.request.user.id })
+
+class ProfileSimpleView(UserViewSet):
+    def general(self, request):
+        generalService = GeneralService()
+        data = generalService.get({"iin" : request.query_params.get("iin")})
+        if data:
+            return Response({"success" : True, "data" : json.loads(data)}, status = 200)
+        
+        return Response({"success" : False , "data" : []}, status = 404)
+    def common(self, request):
+        commonService = CommonService()
+        data = commonService.get({"iin" : request.query_params.get("iin")})
+        if data: 
+            return Response({"success" : True, "data" : json.loads(data)}, status = 200)
+        return Response({"success" : False , "data" : []}, status = 404)
+
 
 class DocumentCreateView(UserCreateViewSet):
     serializer_class = DocumentSerializer

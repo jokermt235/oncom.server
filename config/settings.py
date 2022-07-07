@@ -164,6 +164,14 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_LOGIN = os.getenv('EMAIL_LOGIN')
 EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
+#ONCOM settings
+
+ON_AUTH_SERVER = os.getenv('ON_AUTH_SERVER')
+ON_BE_SERVER = os.getenv('ON_BE_SERVER')
+ON_USERNAME = os.getenv('ON_USERNAME')
+ON_PASSWORD = os.getenv('ON_PASSWORD')
+ON_HOSTUID = os.getenv('ON_HOSTUID')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
