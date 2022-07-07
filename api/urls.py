@@ -40,5 +40,5 @@ urlpatterns = [
     path('login/recover/', LoginRecoverCreateView.as_view({'post':'recover'})),
     path('profile/general/', ProfileSimpleView.as_view({'get':'general'})),
     path('profile/common/', ProfileSimpleView.as_view({'get':'common'})),
-
+    path('profile/treatment/common/', ProfileSimpleView.as_view({'get':'treatment'})),
 ]

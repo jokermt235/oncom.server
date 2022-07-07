@@ -73,5 +73,35 @@ class CommonService(GenericService):
         self.general.close()
         return self.general.getData()
 
+class DiagnoseService(GenericService):
+    def get(self, params = {}):
+        uidService = UidService()
+        params = {
+            "uid" :  uidService.get(params)
+        }
+        self.general.get("/api/profile/get-common", params)
+        self.general.close()
+        return self.general.getData()
 
+class TreatmentCourseService(GenericService):
+    def get(self, params = {}):
+        uidService = UidService()
+        params = {
+            "uid" :  uidService.get(params)
+        }
+        self.general.get("/api/treatment-course/list-by-patient", params)
+        self.general.close()
+        return self.general.getData()
+
+
+class TreatmentService(GenericService):
+    def get(self, params = {}):
+        course = TreatmentCourseService()
+        data  = json.loads(course.get(params))
+        params = {
+            "uid" : data[0]['uid']
+        }
+        self.general.get("/api/treatment-course/get-main", params)
+        self.general.close()
+        return self.general.getData()
 
