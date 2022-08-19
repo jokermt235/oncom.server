@@ -46,6 +46,10 @@ class UserSerializer(serializers.ModelSerializer):
         validated_data.update(data) 
         Profile.objects.create(**validated_data)
         return user
+    def update(self, instance, validated_data):
+        instance.set_password(validated_data.get('password'))
+        instance.save()
+        return { "status" : True}
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -73,5 +77,15 @@ class UserupdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Userupdate
         fields = '__all__'
+
+class ProposalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Proposal
+        fields = '__all__'
+    def create(self, validated_data):
+        del validated_data['status']
+        Proposal.objects.create(**validated_data)
+        return {"status" : True}
+
 
 

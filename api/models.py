@@ -92,3 +92,11 @@ class Userupdate(models.Model):
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
     
+class Proposal(models.Model):
+    user      = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment   = models.CharField(max_length=255, blank=True)
+    confirmed = models.BooleanField(default=False)
+    viewed    = models.BooleanField(default=False)
+    created   = models.DateField(default=date.today)
+    modified  = models.DateField(default=date.today)
+ 
