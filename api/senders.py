@@ -16,7 +16,7 @@ class EmailSender(Sender):
         context = ssl.create_default_context()
 
         msg = EmailMessage()
-        msg['Subject'] = 'Код подтвеждения для входа в систему'
+        msg['Subject'] = 'Код подтвеждения личности'
         msg['From'] = settings.EMAIL_LOGIN
         msg['To'] = self.to
 

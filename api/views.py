@@ -146,13 +146,13 @@ class PincodeCheckView(viewsets.ViewSet):
     serializer_class = PincodeSerializer
     def retrieve(self, request, pk=None):
         data = ModelManager(Pincode).find({"email"  : self.request.query_params.get("email"),"pincode" : self.request.query_params.get("pincode")})
-        email = self.request.query_params.get("email")
+        email = self.request.query_params.get("email").strip()
         if not data:
             return Response({"success": False}, status = 403)
         return Response({"success" : True, "data" : 1}, status = 200)
     def recovercheck(self, request, pk=None):
         pincode = self.request.query_params.get("pincode")
-        email = self.request.query_params.get("email")
+        email = self.request.query_params.get("email").strip()
         _data = ModelManager(User).find({"email": email})
         if not _data:
             return Response({"success": False,"data" : "Not found"}, status = 404)
@@ -165,7 +165,7 @@ class PincodeCheckView(viewsets.ViewSet):
         user.set_password(password)
         user.save(update_fields=['password'])
         emailSender = EmailSender(email) 
-        output = emailSender.send("Это ваш временный пароль  %s не показывайте его никому!" % password)
+        output = emailSender.send("Это ваш временный пароль  %s не показывайте его никому!\n Если вам пароль показался сложным вы можете его сменить в приложении." % password)
         return Response({"success": True,"data" : password}, status = 200)
 
 
@@ -173,13 +173,19 @@ class PincodeCreateView(viewsets.ModelViewSet):
     serializer_class = PincodeSerializer
     def create(self, request):
         rand = random.randint(1111,9999)
-        email = self.request.data["email"]
+        email = self.request.data["email"].strip()
         self.request.data["pincode"] = rand
         emailSender = EmailSender(email)
         data = PincodeSerializer.create(validated_data = self.request.data)
         output = False
         if(data["success"]): 
-            output = emailSender.send("Это ваш OTP пароль: %d для входа ,никому не показывайте" % rand)
+            output = emailSender.send("Поздравляем! Код подтверждения для входа в систему onco log.\n" \
+        "Спасибо, что регистрируетесь в onco log!\n" \
+        "С данного почтового ящика поступил запрос на регистрацию в системе onco log.\n" \
+        "Ваш код для подтверждения регистрации:\n" \
+        "%d\n" \
+        "Код действителен в течение 24 часов с момента подачи заявки.\n" \
+        "Если это были не вы - просто проигнорируйте данное письмо." % rand)
         return Response({"success": True, "data" : output}, status = 201)
     def recover(self, request):
         rand = random.randint(1111,9999)
@@ -190,7 +196,13 @@ class PincodeCreateView(viewsets.ModelViewSet):
         self.request.data["pincode"] = rand
         emailSender = EmailSender(email)
         data = PincodeSerializer.create(validated_data = self.request.data) 
-        output = emailSender.send("This is yor OTP dont tell anyone , show someone %d" % rand)
+        output = emailSender.send("Поздравляем! Код подтверждения для входа в систему onco log.\n" \
+        "Спасибо, что регистрируетесь в onco log!\n" \
+        "С данного почтового ящика поступил запрос на регистрацию в системе onco log.\n" \
+        "Ваш код для подтверждения регистрации:\n" \
+        "%d\n" \
+        "Код действителен в течение 24 часов с момента подачи заявки.\n" \
+        "Если это были не вы - просто проигнорируйте данное письмо." % rand)
         return Response({"success": True, "data" : output}, status = 201)
 
 class LoginRecoverCreateView(EmailSenderView):
