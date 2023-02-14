@@ -87,5 +87,10 @@ class ProposalSerializer(serializers.ModelSerializer):
         Proposal.objects.create(**validated_data)
         return {"status" : True}
 
+class LogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LogItem
+        fields = '__all__'
+
 
 

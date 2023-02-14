@@ -113,6 +113,13 @@ class UpdatePasswordView(UserCreateViewSet):
         return Response({"success" : False , "data" : []}, status = 500)
 
 
+class ProfileDeleteView(UserCreateViewSet):
+    def delete(self, request):
+        u = User.objects.get(id = request.user.id)
+        u.delete()
+        return Response({"success" : True, "data" : []}, status = 200)
+
+
 
 class UserUpdateView(UserCreateViewSet):
     serializer_class = UserupdateSerializer
@@ -236,4 +243,14 @@ class PincodeListView(AdminCreateView):
     serializer_class = PincodeSerializer
     def get_queryset(self):
         return ModelManager(Pincode).find(self.kwargs)
+
+
+
+class LogCreateView(viewsets.ModelViewSet):
+    serializer_class = LogSerializer
+    def log(self, request):
+        serializer = LogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response({"success" : True}, status = 200)
 

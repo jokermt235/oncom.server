@@ -99,4 +99,13 @@ class Proposal(models.Model):
     viewed    = models.BooleanField(default=False)
     created   = models.DateField(default=date.today)
     modified  = models.DateField(default=date.today)
+
+
+class LogItem(models.Model):
+    title  = models.CharField(max_length=255, blank=True)
+    body  = models.CharField(max_length=255, blank=True)
+    created   = models.DateField(default=date.today)
+    modified  = models.DateField(default=date.today)
+
+
  
