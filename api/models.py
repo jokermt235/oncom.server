@@ -20,11 +20,17 @@ class Diaglist(models.Model):
     gender   = models.IntegerField(default=0)
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
+    
+    def __str__(self):
+        return self.name
+
 
 class Question(models.Model):
     name     = models.CharField(unique=True , max_length=255)
     descr    = models.CharField(max_length=255)
     diaglist = models.ForeignKey(Diaglist, on_delete=models.CASCADE)
+    common   = models.BooleanField(default=False)
+    gender   = models.IntegerField(default=0)
     title1   = models.CharField(max_length=255, blank=True)
     value1   = models.IntegerField(default=0)
     title2   = models.CharField(max_length=255, blank=True)
@@ -40,6 +46,9 @@ class Question(models.Model):
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
 
+    def __str__(self):
+        return self.name
+
 class Result(models.Model):
     name     = models.CharField(unique=False , max_length=255)
     descr    = models.TextField()
@@ -47,6 +56,10 @@ class Result(models.Model):
     value = models.IntegerField(default=0)
     created  = models.DateField(default=date.today)
     modified = models.DateField(default=date.today)
+
+    def __str__(self):
+        return self.name
+
 
 # Profile model stands for separate user from profile 
 

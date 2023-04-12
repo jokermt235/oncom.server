@@ -66,3 +66,12 @@ class DocumentManager(Manager):
 class UserupdateManager(Manager):
     def create(self, request):
         return UserupdateSerializer.create(validated_data=request.data)
+
+
+class QuestionModelManager(Manager):
+    def find(self, params):
+        diags = Diaglist.objects.filter()
+        results = []
+        for diag in diags:
+            results.append(Question.objects.filter(diaglist = diag.id).first())
+        return results

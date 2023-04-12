@@ -254,3 +254,17 @@ class LogCreateView(viewsets.ModelViewSet):
             serializer.save()
         return Response({"success" : True}, status = 200)
 
+class QuestionCommonView(generics.ListAPIView):
+     serializer_class = QuestionSerializer
+     def get_queryset(self):
+         return ModelManager(Question).find({"common" : True})
+
+
+class QuestionLocalizationView(generics.ListAPIView):
+     serializer_class = QuestionSerializer
+     def get_queryset(self):
+         return QuestionModelManager(Question).find(self.kwargs)
+
+
+
+
