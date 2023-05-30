@@ -30,6 +30,7 @@ class Question(models.Model):
     descr    = models.CharField(max_length=255)
     diaglist = models.ForeignKey(Diaglist, on_delete=models.CASCADE)
     common   = models.BooleanField(default=False)
+    common2   = models.BooleanField(default=False)
     gender   = models.IntegerField(default=0)
     title1   = models.CharField(max_length=255, blank=True)
     value1   = models.IntegerField(default=0)

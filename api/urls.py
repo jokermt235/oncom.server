@@ -32,6 +32,7 @@ urlpatterns = [
     path('diaglist/all/<int:gender>', DiaglistListView.as_view()),
     path('question/all/<int:diaglist_id>', QuestionListView.as_view()),
     path('question/common/', QuestionCommonView.as_view()),
+    path('question/common2/', QuestionCommonTwoView.as_view()),
     path('question/localization/', QuestionLocalizationView.as_view()),
     path('question/all/', QuestionListView.as_view()),
     path('result/all/<int:diaglist_id>', ResultListView.as_view()),

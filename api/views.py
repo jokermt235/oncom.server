@@ -13,6 +13,8 @@ import random;
 from .senders import EmailSender
 from .services import *
 from django.http import FileResponse
+from api.repositories import ResultRepository
+from api.serializers import ResultSerializer
 User = get_user_model()
 
 # Create your views with permission option here.
@@ -238,6 +240,11 @@ class ResultListView(generics.ListAPIView):
      def get_queryset(self):
          return ModelManager(Result).find(self.kwargs)
 
+     def post(self, request):
+         repository = ResultRepository()
+         result = repository.get(request = request)
+         return Response({"success" : True, "data" : result}, status = 200)
+
 
 class PincodeListView(AdminCreateView):
     serializer_class = PincodeSerializer
@@ -258,6 +265,12 @@ class QuestionCommonView(generics.ListAPIView):
      serializer_class = QuestionSerializer
      def get_queryset(self):
          return ModelManager(Question).find({"common" : True})
+
+class QuestionCommonTwoView(generics.ListAPIView):
+     serializer_class = QuestionSerializer
+     def get_queryset(self):
+         return ModelManager(Question).find({"common2" : True})
+
 
 
 class QuestionLocalizationView(generics.ListAPIView):
