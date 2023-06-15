@@ -37,6 +37,7 @@ urlpatterns = [
     path('question/all/', QuestionListView.as_view()),
     path('result/all/<int:diaglist_id>', ResultListView.as_view()),
     path('result/all/', ResultListView.as_view()),
+    path('result/telegram/', ResultTelegramView.as_view()),
     path('result/all/<int:diaglist_id>/<int:value>', ResultListView.as_view()),
     path('document/all/', DocumentListView.as_view()),
     path('document/view/<str:filename>', DocumentView.as_view({'get': 'view'})),

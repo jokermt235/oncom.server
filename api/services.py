@@ -1,6 +1,8 @@
 #Service factory register
 from .clients import *
 from django.conf import settings
+from api.models import UserResult
+import datetime
 
 class ServiceFactory:
     def __init__(self):
@@ -19,6 +21,10 @@ factory = ServiceFactory()
 
 class BaseService:
     def get(params):
+        pass
+
+class AbstractService:
+    def save(request):
         pass
 
 class JwtService(BaseService):
@@ -104,4 +110,25 @@ class TreatmentService(GenericService):
         self.general.get("/api/treatment-course/get-main", params)
         self.general.close()
         return self.general.getData()
+
+
+class UserResultService(AbstractService):
+    def save(self, request):
+        data = request.data;
+        
+        print(data)
+
+        for item in data:
+            result = UserResult.objects.filter(diagnose = item['name']).first()
+            if result is None:
+                userResult = UserResult.objects.create(diagnose=item['name'], value=item['value'], user_id=request.user.id)
+                userResult.save()
+                return userResult
+            else:
+                result.value = item['value']
+                result.modified = datetime.datetime.now()
+                result.save()
+                return result
+
+        return None
 

@@ -92,5 +92,10 @@ class LogSerializer(serializers.ModelSerializer):
         model = LogItem
         fields = '__all__'
 
+class UserResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserResult
+        fields = '__all__'
+
 
 

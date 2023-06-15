@@ -28,4 +28,5 @@ admin.site.register(Result, ResultAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(LogItem, LogAdmin)
+admin.site.register(UserResult)
 # Register your models here.

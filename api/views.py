@@ -243,7 +243,7 @@ class ResultListView(generics.ListAPIView):
      def post(self, request):
          repository = ResultRepository()
          result = repository.get(request = request)
-         return Response({"success" : True, "data" : result}, status = 200)
+         return Response({"success" : True, "data" : result}, status = 200, content_type='application/json; charset=utf-8')
 
 
 class PincodeListView(AdminCreateView):
@@ -279,5 +279,16 @@ class QuestionLocalizationView(generics.ListAPIView):
          return QuestionModelManager(Question).find(self.kwargs)
 
 
+class ResultTelegramView(UserListView):
+    serializer_class = QuestionSerializer
+    def post(self, request):
+        service = UserResultService()
+        if service.save(request) is None:
+            return Response({"success" : False, "data": {"message" : "Data did not saved"} }, status = 502, content_type='application/json; charset=utf-8')
+        return Response({"success" : True, "data": {} }, status = 200, content_type='application/json; charset=utf-8')
 
+    def get(self, request): 
+        result = UserResult.objects.filter(user_id = request.user.id)
+        serializer = UserResultSerializer(instance=result, many=True)
+        return Response({"success": True, "data" : serializer.data}, status = 200, content_type='application/json; charset=utf-8')
 

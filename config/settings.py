@@ -29,7 +29,7 @@ SECRET_KEY =  os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["muproj.ru",'212.193.53.192','localhost','79.132.136.75']
+ALLOWED_HOSTS = ["muproj.pro",'212.193.53.192','localhost','79.132.136.75']
 
 
 # Application definition
